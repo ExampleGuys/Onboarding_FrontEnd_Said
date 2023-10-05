@@ -62,5 +62,11 @@ public class StepDefs extends ReusableMethods {
     @Then("the user should be able to redirect back to the List of Orders page again.")
     public void theUserShouldBeAbleToRedirectBackToTheListOfOrdersPageAgain() {
         Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("order"));
+
     }
+
+    @And("The user clicks the {string} icon.")
+    public void theUserClicksTheIcon(String arg0) {
+    }
+    //input[@placeholder='Enter personal email']
 }

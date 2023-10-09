@@ -17,6 +17,6 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         dryRun = false,
         stepNotifications=false,
-        tags = "@said or @wip"
+        tags ="@ONB2-213"
 )
 public class Runners {}

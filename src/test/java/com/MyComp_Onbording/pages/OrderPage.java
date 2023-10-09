@@ -1,5 +1,8 @@
 package com.MyComp_Onbording.pages;
 
+import com.MyComp_Onbording.utils.Driver;
+import com.MyComp_Onbording.utils.ReusableMethods;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -114,4 +117,33 @@ public class OrderPage extends BasePage {
     @FindBy(xpath = "//div[@'class='go3958317564']")
     public WebElement new_CreateErrorMesage;
 
+    @FindBy(css = "#Order_company")
+    public WebElement ddm1;
+
+
+    public void clickPlusAccordingToOptionName(String optionName) {
+        getDriver().findElement(By.xpath("//span[text()='" + optionName + "']/..//button")).click();
+
+    }
+
+    public String getPopupsMessage() {
+        WebElement popUpElement = Driver.getDriver().findElement(By.xpath("//div[@role='status']"));
+        String message = ReusableMethods.getTextWithJS(Driver.getDriver(), popUpElement);
+
+        return message;
+
+    }
+
+    public WebElement boxName(String boxNameInfo) {
+        return Driver.getDriver().findElement(By.xpath("//*[@placeholder='" + boxNameInfo + "']"));
+    }
+
+    public WebElement ddmBox(String ddmInfo) {
+        return Driver.getDriver().findElement(By.cssSelector("[title='"+ddmInfo+"']"));
+    }
+
+    public WebElement boxNAme2(String boxNameInfo2) {
+        return Driver.getDriver().findElement(By.xpath("//span[text()='" + boxNameInfo2 + "']"));
+
+    }
 }

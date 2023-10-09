@@ -1,5 +1,6 @@
 package com.MyComp_Onbording.utils;
 
+import com.github.javafaker.Faker;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -303,4 +304,11 @@ public class ReusableMethods extends PageInitializer{
         return element != null;
     }
 
+    public static String getTextWithJS(WebDriver driver, WebElement element) {
+        return ((JavascriptExecutor) driver).executeScript("return arguments[0].innerText;", element).toString();
+    }
+
+    public static String fakeData(){
+        return new Faker().pokemon().name();
+    }
 }

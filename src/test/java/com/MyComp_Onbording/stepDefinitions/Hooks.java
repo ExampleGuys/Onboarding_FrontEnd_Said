@@ -1,5 +1,6 @@
 package com.MyComp_Onbording.stepDefinitions;
 
+import com.MyComp_Onbording.pages.ResourcesPage;
 import com.MyComp_Onbording.utils.Driver;
 import com.MyComp_Onbording.utils.ReusableMethods;
 import io.cucumber.java.After;
@@ -22,6 +23,7 @@ public class Hooks {
             scenario.attach(picture, "image/png", scenario.getName());
         }
         if (getDriver() != null) {
+            ReusableMethods.wait(1);
             getDriver().quit();
         }
     }

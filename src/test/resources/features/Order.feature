@@ -8,22 +8,35 @@ Feature: MyComp Test
     And The user click on the "New Order" button.
     Then the user should be redirected to the new order creation page
 
-  @ONB2-175
+  @ONB2-162
+  Scenario: When the user misses one or more than one required field, then s/he can not create a new order on the "new Order" page.
+    Given The user goes to the sign-in page
+    When user logs in with the valid credentials
+    And Click on the "Orders" section in the Navigation Menu
+    And The user click on the "New Order" button.
+    Then the user should be redirected to the new order creation page
+    And The user should be able to add data to "Enter order title" with "Table"
+    And The user should be able to add data to "Enter description" with "New Employee"
+    And The user click on the "Create" button.
+    And The user should be able to see a warning message as "Please fill out all required fields correctly."
+
+  @ONB2-175 @ONB2-224 @ONB2-226
   Scenario: ONB2 - 175 User should be able to view new orders information under the "list of the orders" section
     Given The user goes to the sign-in page
     When user logs in with the valid credentials
     And Click on the "Orders" section in the Navigation Menu
     And The user click on the "New Order" button.
-   # And user clicks "New Contact" button
-   # And user clicks in the "Title" text area
-   # And user choose an option from "Shipping Address" drop down menü.
-   # And user selects date from "Preferred Delivery Date" box.
-   # And user choose a Priority from Priority drop down menü.
-   # And user type reason for request in "Reason for Request" box.
-   # And in "Process" user chooses an approver from "Approver" ddm.
-   # And in "Service Provider" user chooses a contact from "Contact" ddm.
-   # And user clicks "Create" button
-   # Then user should be able to verify that new order is in the "Orders list
+    And The user select the company from ddm
+    And The user should be able to add data to "Enter order title" with "Table"
+    And The user should be able to add data to "Enter description" with "Hello world "
+    And The user select the shipping adress from ddm
+    And The user select the date from datapicker
+    And The user select the priority from the ddm
+    And The user should be able to add data to "Enter reason for request" with "Required for the new employee"
+    And The user select the approver from the ddm
+    And The user select the contact from the ddm
+    And The user click on the "Create" button.
+    And The user should be able to see a warning message as "Order successfully created"
 
   @ONB2-180
   Scenario: ONB2-180 The user should be able to create the new Company on "New Order" page.
@@ -32,7 +45,31 @@ Feature: MyComp Test
     And Click on the "Orders" section in the Navigation Menu
     And The user click on the "New Order" button.
     And The user clicks the "Company" icon.
-    #Then The user should be able to create the new Company.
+    And The user should be able to add data to "Enter Company Name" with "Samsung"
+    And The user click on the "OK" button.
+    And The user should be able to see a warning message as "Company successfully created"
+
+  @ONB2-183
+    Scenario: User should not be able to create a contact
+    Given The user goes to the sign-in page
+    When user logs in with the valid credentials
+    And Click on the "Orders" section in the Navigation Menu
+    And The user click on the "New Order" button.
+    And The user select the company from ddm
+    #And The user select an option to "Select the company" from ddm as "Test Techno".
+    And The user clicks the "Contact" icon.
+    And The user should be able to add data to "Enter full name or company" with "gpt3"
+    And The user should be able to add data to "Enter email" with "gpt3@gmail.com"
+    And The user click on the "OK" button.
+    And The user should be able to see a warning message as "Contact successfully created"
+
+  @ONB2-196
+    Scenario: Then the user should be able write a comment in the comment box.
+    Given The user goes to the sign-in page
+    When user logs in with the valid credentials
+    And Click on the "Orders" section in the Navigation Menu
+    And The user click on the "New Order" button.
+    And The user should be able to add data to "Enter a comment" with "aaaa"
 
   @ONB2-186
   Scenario: ONB2 -186 The back button on the "New orders" page should work properly
@@ -43,16 +80,24 @@ Feature: MyComp Test
     And The user click on the "Back" button.
     Then the user should be able to redirect back to the List of Orders page again.
 
-  #@ONB2-217
-  #Scenario: User should be able to create a new (approver) user type
-      # Given user goes to the test environment as a admin
-      # When user enters valid user email and user password
-      # And user clicks sign in button
-      # And user clicks "Orders" from the navigation menu
-      # And user clicks "New Order" button
-      # And user scrolls to the bottom of the page.
-      # And user clicks "Approver" icon.
-      # And user fills in all required fields properly
-      # And user clicks the Ok button
-      # Then user should be able to create a new approver user type
+  @ONB2-213
+  Scenario: User should be able to enter Maximum 500 characters  in the Description field.
+    Given The user goes to the sign-in page
+    When user logs in with the valid credentials
+    And Click on the "Orders" section in the Navigation Menu
+    And The user click on the "New Order" button.
+    Then The user should be able to type up to fivehundred characters in the Description field.
+
+  @ONB2-217
+  Scenario: User should be able to create a new (approver) user type
+    Given The user goes to the sign-in page
+    When user logs in with the valid credentials
+    And Click on the "Orders" section in the Navigation Menu
+    And The user click on the "New Order" button.
+    And The user select the company from ddm
+    And The user clicks the "Approver" icon.
+    And user fills in all required fields properly
+    And The user click on the "OK" button.
+    And The user should be able to see a warning message as "User successfully created"
+
 

@@ -120,6 +120,13 @@ public class OrderPage extends BasePage {
     @FindBy(css = "#Order_company")
     public WebElement ddm1;
 
+    @FindBy(css = "div[class='ant-form-item-control-input-content'] span textarea[id='Order_description']")
+    public WebElement orderEnterDescriptionInfo;
+	@FindBy(xpath = "(//span [@class='ant-input-data-count'])[1]")
+	public WebElement order500InputDataCount;
+
+	@FindBy(css="#Order_delivery_date")
+	public WebElement datapicker;
 
     public void clickPlusAccordingToOptionName(String optionName) {
         getDriver().findElement(By.xpath("//span[text()='" + optionName + "']/..//button")).click();
@@ -146,4 +153,7 @@ public class OrderPage extends BasePage {
         return Driver.getDriver().findElement(By.xpath("//span[text()='" + boxNameInfo2 + "']"));
 
     }
+	@FindBy(css="#Order_priority")
+	public WebElement priorityDdm;
+
 }

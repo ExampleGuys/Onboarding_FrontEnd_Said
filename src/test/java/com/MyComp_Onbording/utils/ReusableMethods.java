@@ -308,7 +308,18 @@ public class ReusableMethods extends PageInitializer{
         return ((JavascriptExecutor) driver).executeScript("return arguments[0].innerText;", element).toString();
     }
 
-    public static String fakeData(){
+    public static String fakeName(){
         return new Faker().pokemon().name();
     }
+
+    public static String fakeEmailAdress(){
+        return new Faker().internet().emailAddress();
+    }
+
+    public static String fakeComments500() {
+        return new  Faker().lorem().characters(510);
+
+
+    }
+
 }

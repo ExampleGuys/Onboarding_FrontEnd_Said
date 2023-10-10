@@ -5,8 +5,8 @@ import com.MyComp_Onbording.pages.SignInPage;
 import com.MyComp_Onbording.utils.ConfigReader;
 import com.MyComp_Onbording.utils.Driver;
 import com.MyComp_Onbording.utils.ReusableMethods;
-import com.beust.ah.A;
 import com.github.javafaker.Faker;
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -91,11 +91,12 @@ public class StepDefs extends ReusableMethods {
 
     @And("The user should be able to add data to {string} with {string}")
     public void theUserShouldBeAbleToCreateNewCompany(String placeHolder, String companyNAme) {
+        String fakeDataInfo = fakeName();
         orderPage.boxName(placeHolder).sendKeys(companyNAme);
         ReusableMethods.wait(1);
         Assert.assertEquals(orderPage.boxName(placeHolder).getAttribute("value"), companyNAme);
 
-    }
+}
 
     @And("The user should be able to see a warning message as {string}")
     public void theUserShouldBeAbleToSeeAWarningMessageAs(String message) {
@@ -134,7 +135,7 @@ public class StepDefs extends ReusableMethods {
 
     @And("The user should be able to add data to {string}")
     public void theUserShouldBeAbleToAddDataTo(String placeHolder) {
-        String fakeDataInfo = fakeData();
+        String fakeDataInfo = fakeName();
         orderPage.boxName(placeHolder).sendKeys(fakeDataInfo);
 
         ReusableMethods.wait(1);
@@ -187,6 +188,8 @@ public class StepDefs extends ReusableMethods {
         ReusableMethods.clickWithJS(button2);
         ReusableMethods.wait(1);
         button2.sendKeys("31-10-2023" + Keys.ENTER);
+        Assert.assertTrue(orderPage.datapicker.isEnabled());
+
 
     }
 
@@ -196,9 +199,9 @@ public class StepDefs extends ReusableMethods {
         ReusableMethods.clickWithJS(button2);
         ReusableMethods.wait(1);
         button2.sendKeys("Normal" + Keys.ENTER);
+        Assert.assertTrue(orderPage.priorityDdm.isEnabled());
 
     }
-
     @And("The user select the approver from the ddm")
     public void theUserSelectTheApproverFromTheDdm() {
 
@@ -221,17 +224,34 @@ public class StepDefs extends ReusableMethods {
 
     @Then("The user should be able to type up to fivehundred characters in the Description field.")
     public void theUserShouldBeAbleToTypeUpToFivehundredCharactersInTheDescriptionField() {
-        String str500="The user should be able to type up to fivehundred characters in the Description field " +
-                "The user should be able to type up to fivehundred characters in the Description field " +
-                "The user should be able to type up to fivehundred characters in the Description field " +
-                "The user should be able to type up to fivehundred characters in the Description field " +
-                "The user should be able to type up to fivehundred characters in the Description field-field " +
-                "The user should be able to type up to fivehundred characters in ";
 
-        orderPage.boxName("Description").sendKeys(str500);
+       String str= faker.lorem().characters(510);
+        int strlength = str.length(); //510
+        orderPage.boxName("Enter reason for request").sendKeys(str);
 
+       int textlength = orderPage.orderEnterDescriptionInfo.getText().length();
 
+        String str500 = orderPage.order500InputDataCount.getText();
 
+        int bosluk = str500.indexOf(" "); //3
+
+        int fivehundred = Integer.parseInt(str500.substring(0,bosluk)); //500 int
+
+        Assert.assertEquals(textlength,fivehundred);
+
+       // Assert.assertNotEquals(strlength,textlength);
 
     }
+
+
+    @And("The user should be able to add Email adress to {string}")
+    public void theUserShouldBeAbleToAddEmailAdressTo(String placeHolder) {
+        String fakeEmailInfo = fakeEmailAdress();
+        orderPage.boxName(placeHolder).sendKeys(fakeEmailInfo);
+
+        ReusableMethods.wait(1);
+        Assert.assertEquals(orderPage.boxName(placeHolder).getAttribute("value"), fakeEmailInfo);
+
+    }
+
 }

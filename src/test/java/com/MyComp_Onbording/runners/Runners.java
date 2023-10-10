@@ -17,6 +17,6 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         dryRun = false,
         stepNotifications=false,
-        tags ="@ONB2-213"
+        tags =""
 )
 public class Runners {}
